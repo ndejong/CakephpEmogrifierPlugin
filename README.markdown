@@ -37,8 +37,8 @@ Questions and Answers
 =====================
 Q: Pelago's Emogrifier class requires you to pass in the CSS but this plugin does
    not, what's going on?
-A: We parse the HTML from the View->output attribute looking for CSS from <link>
-   and <style> elements then stich the whole thing together - it makes using this
+A: We parse the HTML from the View->output attribute looking for CSS from link
+   and style elements then stich the whole thing together - it makes using this
    a little easier.
 
 Q: I'm using Emogrifier before rendering to webpages and I can't see any difference
