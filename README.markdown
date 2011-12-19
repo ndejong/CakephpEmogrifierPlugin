@@ -17,6 +17,7 @@ Install
 ### Step 1
 Copy or symlink CakephpEmogrifierPlugin into a path named Emogrifier in your Plugin
 path like this:-
+
 >  app/Plugin/Emogrifier
 
 Take careful note of the Plugin pathname, the name is "Emogrifier", not 
@@ -26,10 +27,12 @@ from github or unpacking from a tarball.
 
 ### Step 2
 Be sure to load the plugin in your bootstrap.php or core.php, like this:-
+
 >  CakePlugin::load('Emogrifier');
 
 ### Step 3
 Tell your controller to render your view with Emogrifier like this:-
+
 >  $this->viewClass = 'Emogrifier.Emogrifier';
 
 
