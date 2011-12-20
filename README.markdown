@@ -6,19 +6,20 @@ your HTML output easy.
 
 Wondering what Emogrify is?  Emogrifier is a great library from Pelago that deals
 with much of the hassle involved with HTML formatted email messages:-
+
  - http://www.pelagodesign.com/sidecar/emogrifier/
 
 This Plugin is a wrapper around Emogrifier making it easy to use in CakePHP 2.0x
 
 
 Install
-=======
+-------
 
 ### Step 1
 Copy or symlink CakephpEmogrifierPlugin into a path named Emogrifier in your Plugin
 path like this:-
 
->  app/Plugin/Emogrifier
+    app/Plugin/Emogrifier
 
 Take careful note of the Plugin pathname, the name is "Emogrifier", not 
 EmogrifierPlugin or CakephpEmogrifierPlugin, it's just Emogrifier.  I spell this 
@@ -28,26 +29,26 @@ from github or unpacking from a tarball.
 ### Step 2
 Be sure to load the plugin in your bootstrap.php or core.php, like this:-
 
->  CakePlugin::load('Emogrifier');
+    CakePlugin::load('Emogrifier');
 
 ### Step 3
 Tell your controller to render your view with Emogrifier like this:-
 
->  $this->viewClass = 'Emogrifier.Emogrifier';
+    $this->viewClass = 'Emogrifier.Emogrifier';
 
 
 Questions and Answers
-=====================
+---------------------
 Q: Pelago's Emogrifier class requires you to pass in the CSS but this plugin does
-   not, what's going on?
+   not, what's going on?  
 A: We parse the HTML from the View->output attribute looking for CSS from link
    and style elements then stich the whole thing together - it makes using this
    a little easier.
 
-Q: I'm using Emogrifier before rendering to webpages and I can't see any difference
+Q: I'm using Emogrifier before rendering to webpages and I can't see any difference  
 A: Take a look at the HTML source, you should notice that all your CSS styles are
    now inline element style attributes.
 
-Q: Why does this Plugin have no Tests?
+Q: Why does this Plugin have no Tests?  
 A: Because call me daft, I just can't work out how to write a PHPUnit test for 
    output from a Plugin View - let me know if you do!
