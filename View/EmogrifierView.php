@@ -166,7 +166,7 @@ class EmogrifierView extends View {
 		$css_filenames = array_merge($this->_globRecursive(CSS.'*.Css'),$this->_globRecursive(CSS.'*.CSS'),$this->_globRecursive(CSS.'*.css'));
 		
 		// Build an array of the ever more path specific $css_href location
-		$css_hrefs = split(DS,$css_href);
+		$css_hrefs = explode('/',$css_href);
 		$css_href_paths = array();
 		for($i=count($css_hrefs)-1;$i>0;$i--) {
 			if(isset($css_href_paths[count($css_href_paths)-1])) {
