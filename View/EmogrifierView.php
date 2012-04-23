@@ -73,7 +73,7 @@ class EmogrifierView extends View {
 		$css = $this->_extractAndRemoveCss();
 
 		// Import the Emogrifier class
-		App::import('Emogrifier.Vendor', 'Emogrifier', array('file' => 'emogrifier.php'));
+		App::import('Vendor', 'Emogrifier.emogrifier');
 		$Emogrifier = new Emogrifier($this->output, $css);
 
 		// Emogrification!
