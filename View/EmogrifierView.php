@@ -79,7 +79,7 @@ class EmogrifierView extends View {
 		// Emogrification!
 		$this->output = @$Emogrifier->emogrify();
 		
-		echo $this->output;exit;
+		//echo $this->output;exit;
 		return $this->output;
 	}
 	
