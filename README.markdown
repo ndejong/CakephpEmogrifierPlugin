@@ -19,7 +19,7 @@ Install
 Copy or symlink CakephpEmogrifierPlugin into a path named Emogrifier in your Plugin
 path like this:-
 
-    app/Plugin/Emogrifier
+    %APP%/Plugin/Emogrifier
 
 Take careful note of the Plugin pathname, the name is "Emogrifier", not 
 EmogrifierPlugin or CakephpEmogrifierPlugin, it's just Emogrifier.  I spell this 
@@ -31,7 +31,15 @@ Be sure to load the plugin in your bootstrap.php or core.php, like this:-
 
     CakePlugin::load('Emogrifier');
 
-### Step 3
+### Step 3.a (for the email case)
+Tell CakeEmail to Emogrify the HTML rendering by calling viewRender()
+
+    $email = new CakeEmail();
+    $email->viewRender('Emogrifier.Emogrifier');
+    $email->emailFormat('html');
+    $email->send('hello world');
+
+### Step 3.b (for web output, if you really wanted this...)
 Tell your controller to render your view with Emogrifier like this:-
 
     $this->viewClass = 'Emogrifier.Emogrifier';
