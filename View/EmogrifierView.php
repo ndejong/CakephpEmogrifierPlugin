@@ -12,13 +12,32 @@
 App::uses('View', 'View');
 
 /**
- * ### Usage
+ * All <style> tags found in the content will be moved inline: <tag style="...">
+ * 
+ * To prevent this for individual style tags (such as when using media queries, targeting mobiles or 
+ * specific email clients), use <style class="notInline">...</style>.  These tags will be left as-is.
+ * 
+ * ### Usage 
  * 
  * class ExampleController extends AppController {
  * 
  * 		public function index () {
+ * 			// This will send the view output through the Emogrifier parser, moving all styles inline
  *			$this->viewClass = 'Emogrifier.Emogrifier';
  * 		}
+ * 
+ * 		public function sendEmail () {
+ * 			App::uses('CakeEmail', 'Network/Email');
+ *			$email = new CakeEmail();
+ *			$email->to(...)
+ *				  ->from(...)
+ *				  ->subject(...)
+ *				  ->viewVars(...)
+ *				  ->template('myTemplate', 'myLayout')
+ *				  ->viewRender('Emogrifier.Emogrifier')
+ *				  ->emailFormat('html')
+ *				  ->send();
+ *		}
  * }
  * 
  */
@@ -127,6 +146,7 @@ class EmogrifierView extends View {
 		
 		// Style
 		foreach($styles as $style) {
+			if($style->getAttribute('class') == 'notInline') continue;
 			if($style->hasAttribute('media')) {
 				foreach($this->media_types as $css_link_media) {
 					if(strstr($style->getAttribute('media'),$css_link_media)) {
