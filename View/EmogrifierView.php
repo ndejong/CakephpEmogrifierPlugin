@@ -85,6 +85,10 @@ class EmogrifierView extends View {
 	 */
 	public function render($view = null, $layout = null) {
 
+		// If it is the text/both version of an email: ->emailFormat('both')
+		if($this->layoutPath == 'Emails/text' && $this->viewPath == 'Emails/text')
+			return parent::render($view, $layout);
+
 		// Let the parent do it's rendering thing first
 		parent::render($view, $layout);
 		
