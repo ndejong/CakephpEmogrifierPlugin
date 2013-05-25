@@ -94,7 +94,7 @@ class EmogrifierView extends View {
 		parent::render($view, $layout);
 		
 		// Parse out the CSS into a string and remove any CSS from the output
-		$css = $this->_extractAndRemoveCss();
+		$css = preg_replace( '/\s+/', " ", $this->_extractAndRemoveCss() );
 
 		// Import the Emogrifier class
 		App::import('Vendor', 'Emogrifier.emogrifier');
