@@ -182,6 +182,7 @@ class Emogrifier
         $css = $this->css;
         $nodes = @$xpath->query('//style');
         foreach ($nodes as $node) {
+            if ($node->getAttribute('class') == 'notInline') continue;
             // append the css
             $css .= "\n\n{$node->nodeValue}";
             // remove the <style> node
