@@ -118,8 +118,10 @@ class EmogrifierView extends View {
 		$html = $this->output;
 		$css = null;
 		
+		libxml_use_internal_errors(true);
 		$DOM = new DOMDocument;
 		$DOM->loadHTML($html);
+		libxml_clear_errors();
 		
 		// DOM removal queue
 		$remove_doms = array();
