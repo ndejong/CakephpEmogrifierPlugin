@@ -56,7 +56,3 @@ A: We parse the HTML from the View->output attribute looking for CSS from link
 Q: I'm using Emogrifier before rendering to webpages and I can't see any difference  
 A: Take a look at the HTML source, you should notice that all your CSS styles are
    now inline element style attributes.
-
-Q: Why does this Plugin have no Tests?  
-A: Because call me daft, I just can't work out how to write a PHPUnit test for 
-   output from a Plugin View - let me know if you do!
