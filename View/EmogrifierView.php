@@ -343,8 +343,6 @@ class EmogrifierView extends View {
 
                 // Plugin vendor path candidates
                 $plugin_vendor_candidates = array(
-                    'Emogrifier.php',
-                    'emogrifier.php',
                     'emogrifier/Classes/Emogrifier.php',
                     'emogrifier/Classes/emogrifier.php',
                     'Emogrifier/Classes/Emogrifier.php',
@@ -353,6 +351,8 @@ class EmogrifierView extends View {
                     'emogrifier/emogrifier.php',
                     'Emogrifier/Emogrifier.php',
                     'Emogrifier/emogrifier.php',
+                    'Emogrifier.php',
+                    'emogrifier.php',
                 );
 
                 foreach($plugin_vendor_candidates as $plugin_vendor_candidate) {

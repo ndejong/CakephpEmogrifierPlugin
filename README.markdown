@@ -27,12 +27,19 @@ EmogrifierPlugin or CakephpEmogrifierPlugin, it's just Emogrifier.  I spell this
 out because it's an easy thing to trip up on especially if your pulling this down 
 from github or unpacking from a tarball.
 
-### Step 2
-Make sure you have the Emogrifier library from https://github.com/jjriv/emogrifier
-in the Plugin Vendor path
+### Step 2 (optional)
+Update the Emogrifier library from https://github.com/jjriv/emogrifier into the 
+Vendor path of CakephpEmogrifierPlugin
 
     cd %APP%/Plugin/Emogrifier/Vendor
     git clone https://github.com/jjriv/emogrifier
+
+NB: the Emogrifier.php that ships with CakephpEmogrifierPlugin will only be used
+if you do not clone in the latest from https://github.com/jjriv/emogrifier
+
+NB2: it is safe to remove %APP%/Plugin/Emogrifier/Vendor/Emogrifier.php after you
+have cloned the latest https://github.com/jjriv/emogrifier to make it available
+to the CakephpEmogrifierPlugin plugin
 
 ### Step 3
 Be sure to load the plugin in your bootstrap.php or core.php, like this:-
