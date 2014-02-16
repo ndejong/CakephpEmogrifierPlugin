@@ -73,6 +73,19 @@ class EmogrifierView extends View {
 	 */
 	public function __construct($controller = null) {
 		parent::__construct($controller);
+
+        if(Configure::read('Emogrifier.media_types')) {
+            $this->media_types = Configure::read('Emogrifier.media_types');
+        }
+
+        if(Configure::read('Emogrifier.remove_css')) {
+            $this->remove_css = Configure::read('Emogrifier.remove_css');
+        }
+
+        if(Configure::read('Emogrifier.import_external_css')) {
+            $this->import_external_css = Configure::read('Emogrifier.import_external_css');
+        }
+
 	}
 
 	/**

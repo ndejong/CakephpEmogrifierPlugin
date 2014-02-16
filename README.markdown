@@ -8,6 +8,7 @@ Wondering what Emogrify is?  Emogrifier is a great library from Pelago that deal
 with much of the hassle involved with HTML formatted email messages:-
 
  - http://www.pelagodesign.com/sidecar/emogrifier/
+ - https://github.com/jjriv/emogrifier
 
 This Plugin is a wrapper around Emogrifier making it easy to use in CakePHP 2.0x
 
