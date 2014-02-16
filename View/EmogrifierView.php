@@ -1,13 +1,13 @@
 <?php
 
-/* ***************************************************************************
+/****************************************************************************
  * Cakephp EmogrifierPlugin
  * Nicholas de Jong - http://nicholasdejong.com - https://github.com/ndejong
- * 19 December 2011
+ * 16 Feb 2014
  * 
  * @author Nicholas de Jong
  * @copyright Nicholas de Jong
- * ***************************************************************************/
+ ****************************************************************************/
 
 App::uses('View', 'View');
 
@@ -96,9 +96,24 @@ class EmogrifierView extends View {
 		// Parse out the CSS into a string and remove any CSS from the output
 		$css = preg_replace( '/\s+/', " ", $this->_extractAndRemoveCss() );
 
-		// Import the Emogrifier class
-		App::import('Vendor', 'Emogrifier.emogrifier');
-		$Emogrifier = new Emogrifier($this->output, $css);
+		// Work hard to find and locate the Emogrifier external class
+        $emogrifier_include = $this->_locateEmogrifierInclude();
+        if(!$emogrifier_include) {
+            throw new Exception('Unable to locate Emogrifier vendor library!');
+        }
+
+		// Include the Emogrifier class
+        include_once($emogrifier_include);
+
+        // Try and instantiate
+        $Emogrifier = null;
+
+        if(in_array('Pelago\Emogrifier',get_declared_classes())) {
+	        $Emogrifier = new Pelago\Emogrifier($this->output, $css);
+        }
+        else {
+	        $Emogrifier = new Emogrifier($this->output, $css);
+        }
 
 		// Emogrification!
 		$this->output = @$Emogrifier->emogrify();
@@ -274,5 +289,72 @@ class EmogrifierView extends View {
 		
 		return $css;
 	}
+
+	/**
+	 * _locateEmogrifierInclude
+	 */
+	protected function _locateEmogrifierInclude() {
+
+        // attempt to read from cache first
+        if(Cache::read('Emogrifier.include') && Configure::read('debug') < 1){
+            return Cache::read('Emogrifier.include');
+        }
+
+        $emogrifier_include = null;
+
+        // If Emogrifier.include was specified try and load it
+        if(Configure::read('Emogrifier.include')) {
+            // Include via fully qualified pathname
+            if(DS == substr(Configure::read('Emogrifier.include'),0,1)) {
+                if(is_file(Configure::read('Emogrifier.include'))) {
+                    $emogrifier_include = Configure::read('Emogrifier.include');
+                }
+            }
+
+            // Include via Plugin Vendor path 
+            else {
+                foreach(App::path('Vendor','Emogrifier') as $vendor_path) {
+                    if(is_file($vendor_path.Configure::read('Emogrifier.include'))) {
+                        $emogrifier_include = $vendor_path.Configure::read('Emogrifier.include');
+                        break 1;
+                    }
+                }
+            }
+        }
+
+        // At this point we are just guessing...
+        else {
+            foreach(App::path('Vendor','Emogrifier') as $vendor_path) {
+
+                // Plugin vendor path candidates
+                $plugin_vendor_candidates = array(
+                    'Emogrifier.php',
+                    'emogrifier.php',
+                    'emogrifier/Classes/Emogrifier.php',
+                    'emogrifier/Classes/emogrifier.php',
+                    'Emogrifier/Classes/Emogrifier.php',
+                    'Emogrifier/Classes/emogrifier.php',
+                    'emogrifier/Emogrifier.php',
+                    'emogrifier/emogrifier.php',
+                    'Emogrifier/Emogrifier.php',
+                    'Emogrifier/emogrifier.php',
+                );
+
+                foreach($plugin_vendor_candidates as $plugin_vendor_candidate) {
+                    if(is_file($vendor_path.$plugin_vendor_candidate)) {
+                        $emogrifier_include = $vendor_path.$plugin_vendor_candidate;
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        // cache this result if we found it
+        if($emogrifier_include) {
+            Cache::write('Emogrifier.include',$emogrifier_include);
+        }
+
+        return $emogrifier_include;
+    }
 
 }
