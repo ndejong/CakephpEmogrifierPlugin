@@ -2,11 +2,11 @@
 
 /****************************************************************************
  * Cakephp EmogrifierPlugin
- * Nicholas de Jong - http://nicholasdejong.com - https://github.com/ndejong
+ * Verb Networks Pty Ltd - http://verbnetworks.com - https://github.com/verbnetworks
  * 16 Feb 2014
  * 
  * @author Nicholas de Jong
- * @copyright Nicholas de Jong
+ * @copyright Verb Networks Pty Ltd
  ****************************************************************************/
 
 App::uses('View', 'View');
